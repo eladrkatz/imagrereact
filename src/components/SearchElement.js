@@ -9,43 +9,20 @@ class SearchElement extends Component {
 
         this.state = { searchString: '' };
     }
-    componentDidMount() {
-    }
 
     updateSearchValue(event) {
         this.setState({searchString: event.target.value});
     }
 
     doSearch() {
-
         this.props.fetchData(this.state.searchString);
     }
 
     render() {
-        if (this.props.hasErrored) {
-            return <p>Sorry! There was an error loading the items</p>;
-        }
-
-        if (this.props.isLoading) {
-            return <p>Loading…</p>;
-        }
-
-
         return (
-            <div>
+            <div className="SearchBox">
                 <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} />
                 <button onClick={this.doSearch.bind(this)}>Search Images</button>
-
-            <table>
-                <tbody>
-                {this.props.images.map((item) => (
-                    <tr key={item.id}>
-                        <td>{item.type}</td>
-                        <td><img src={item.src} height="99"/></td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
             </div>
         );
     }
@@ -53,23 +30,16 @@ class SearchElement extends Component {
 
 
 SearchElement.propTypes = {
-    fetchData: PropTypes.func.isRequired,
-    images: PropTypes.array.isRequired,
-    hasErrored: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired
+    fetchData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
-    return {
-        images: state.imageResults,
-        hasErrored: state.itemsHasErrored,
-        isLoading: state.itemsIsLoading
-    };
+    return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(imagesFetchData(url))
+        fetchData: (url) => dispatch(imagesFetchData(url, true))
     };
 };
 

@@ -1,27 +1,28 @@
-export function imagesHaveErrored(state = false, action) {
-    switch (action.type) {
-        case 'IMAGES_HAVE_ERRORED':
-            return action.hasErrored;
 
+export function historyCache(state = [], action) {
+    switch (action.type) {
+        case 'HISTORY_SEARCH_ADDED':
+            let cache = state.slice(0, 10);
+
+            cache.splice(0, 0, {
+                id: new Date().getTime(),
+                term: action.searchText
+            });
+
+            return cache;
+
+        case 'HISTORY_CLEAR':
+            return [];
         default:
             return state;
     }
 }
 
-export function imagesAreLoading(state = false, action) {
-    switch (action.type) {
-        case 'IMAGES_ARE_LOADING':
-            return action.isLoading;
-
-        default:
-            return state;
-    }
-}
 
 export function imageResults(state = [], action) {
     switch (action.type) {
         case 'IMAGES_FETCH_DATA_SUCCESS':
-            return action.imageResults; //.slice(0, 10);
+            return action.imageResults;
 
         default:
             return state;

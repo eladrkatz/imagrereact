@@ -1,14 +1,9 @@
-export function imagesHaveErrored(bool) {
-    return {
-        type: 'IMAGES_HAVE_ERRORED',
-        hasErrored: bool
-    };
-}
 
-export function imagesAreLoading(bool) {
+
+export function historySearchAdded(searchText) {
     return {
-        type: 'IMAGES_ARE_LOADING',
-        isLoading: bool
+        type: 'HISTORY_SEARCH_ADDED',
+        searchText
     };
 }
 
@@ -19,9 +14,18 @@ export function imagesFetchDataSuccess(imageResults) {
     };
 }
 
-export function imagesFetchData(searchText) {
+export function clearHistory() {
+    return {
+        type: 'HISTORY_CLEAR'
+    };
+}
+
+export function imagesFetchData(searchText, addToHistory) {
     return (dispatch) => {
-        dispatch(imagesAreLoading(true));
+
+        if (addToHistory) {
+            dispatch(historySearchAdded(searchText));
+        }
 
         let urlPixabay = `https://pixabay.com/api/?key=5237003-df8ec7ded9cea8b1e96684130&q=${searchText}&image_type=photo&pretty=true`;
 
@@ -31,7 +35,6 @@ export function imagesFetchData(searchText) {
         Promise.all([fetch(urlPixabay), fetch(urlFlickr)]).then(responses => {
             return Promise.all([responses[0].json(), responses[1].json()]);
         }).then(responses => {
-
 
             let results = [];
 
@@ -53,20 +56,5 @@ export function imagesFetchData(searchText) {
 
             dispatch(imagesFetchDataSuccess(results));
         });
-
-        // fetch(url)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw Error(response.statusText);
-        //         }
-
-        //         dispatch(imagesAreLoading(false));
-
-        //         return response;
-        //     })
-        //     .then((response) => response.json())
-        //     //.then((result) => dispatch(imagesFetchDataSuccess(result.hits)))
-        //     .then((result) => dispatch(imagesFetchDataSuccess(result.photos.photo)))
-        //     .catch(() => dispatch(imagesHaveErrored(true)));
     };
 }
