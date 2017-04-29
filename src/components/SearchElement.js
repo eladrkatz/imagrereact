@@ -18,11 +18,7 @@ class SearchElement extends Component {
 
     doSearch() {
 
-        //let url = `https://pixabay.com/api/?key=5237003-df8ec7ded9cea8b1e96684130&q=${this.state.searchString}&image_type=photo&pretty=true`;
-
-        let url = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2f70f1a0e94575ba10c9dda701454c42&text=${this.state.searchString}&format=json&nojsoncallback=1`;
-
-        this.props.fetchData(url);
+        this.props.fetchData(this.state.searchString);
     }
 
     render() {
@@ -44,10 +40,8 @@ class SearchElement extends Component {
                 <tbody>
                 {this.props.images.map((item) => (
                     <tr key={item.id}>
-                        {/*<td>{item.tags}</td>*/}
-                        <td>{item.title}</td>
-                        <td><img src={item.previewURL}/></td>
-                        <td><img src={'https://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg'} /> </td>
+                        <td>{item.type}</td>
+                        <td><img src={item.src} height="99"/></td>
                     </tr>
                 ))}
                 </tbody>
