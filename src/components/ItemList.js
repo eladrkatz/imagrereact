@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
         hasErrored: state.itemsHasErrored,
         isLoading: state.itemsIsLoading
     };
-}; 
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {

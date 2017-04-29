@@ -12,7 +12,7 @@
         "es6": true
     },
     "globals": {
-        "module": true,
+        "module": true
     },
     "plugins": [
       "react"
@@ -104,7 +104,7 @@
         "indent": [2, 4, { "SwitchCase": 1 }],
         "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
         "keyword-spacing": 2,
-        "linebreak-style": [2, "unix"],
+        "linebreak-style": [2, "windows"],
         "new-cap": 2,
         "new-parens": 2,
         "newline-after-var": [2, "always"],
