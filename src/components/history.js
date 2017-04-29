@@ -15,7 +15,7 @@ class HistoryElement extends Component {
 
     render() {
         return (
-            <div>
+            <div className="HistoryBox">
                 <button onClick={this.clearHistory.bind(this)}>Clear History</button>
                 <div>
                     {this.props.historyCache.map((item) => (

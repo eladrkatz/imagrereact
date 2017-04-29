@@ -12,10 +12,12 @@ const store = configureStore();
 
 render(
     <Provider store={store}>
-        <div>
-            <HistoryElement />
+        <div className='main'>
             <SearchElement />
-            <ImageResults />
+            <div>
+                <HistoryElement />
+                <ImageResults />
+            </div>
         </div>
     </Provider>,
     document.getElementById('app')

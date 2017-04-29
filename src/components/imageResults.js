@@ -5,17 +5,15 @@ class ImageResults extends Component {
 
     render() {
         return (
-            <div>
-            <table>
-                <tbody>
+            <div className="ResultBox">
                 {this.props.images.map((item) => (
-                    <tr key={item.id}>
-                        <td>{item.type}</td>
-                        <td><img src={item.src} height="99"/></td>
-                    </tr>
+                    <div key={item.id} className="ImageResult">
+                        <div>
+                            <img src={item.src} />
+                        </div>
+                        <span>{item.type}</span>
+                    </div>
                 ))}
-                </tbody>
-            </table>
             </div>
         );
     }

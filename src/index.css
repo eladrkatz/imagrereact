@@ -1,7 +1,49 @@
 
+.main {
+    width: 1024px;
+    margin: auto;
+}
 
 .SearchBox {
-    border: solid 1px black;
+    margin: auto;
+    margin-top: 100px;
+    width:700px;
 }
-.ResultBox {}
-HistoryBox {}
+.SearchBox input {
+    width: 500px;
+    margin-right: 10px;
+    font-size: 22px;
+}
+.SearchBox button { 
+    font-size: 22px;
+ }
+
+.ResultBox {
+    margin: 5px;
+    width: 800px;
+}
+
+.ResultBox .ImageResult {
+    border: solid 1px #ccc;
+    background-color: #fafafa;
+    margin: 10px;
+    display: inline-block;
+}
+
+.ResultBox .ImageResult div {
+    background-color: #333;
+    width: 150px;
+    height: 150px; 
+}
+
+.ResultBox .ImageResult img {
+    max-width: 150px;
+    max-height: 150px;
+    margin: auto;
+}
+
+.HistoryBox {
+    margin: 5px;
+    float: right;
+    width: 200px;
+}
