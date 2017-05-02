@@ -2,7 +2,7 @@
 export function historyCache(state = [], action) {
     switch (action.type) {
         case 'HISTORY_SEARCH_ADDED':
-            let cache = state.slice(0, 10);
+            let cache = state.slice(0, 9);
 
             cache.splice(0, 0, {
                 id: new Date().getTime(),

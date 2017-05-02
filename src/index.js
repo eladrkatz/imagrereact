@@ -14,10 +14,8 @@ render(
     <Provider store={store}>
         <div className='main'>
             <SearchElement />
-            <div>
-                <HistoryElement />
-                <ImageResults />
-            </div>
+            <HistoryElement />
+            <ImageResults />
         </div>
     </Provider>,
     document.getElementById('app')

@@ -7,7 +7,11 @@ class SearchElement extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = { searchString: '' };
+        this.state = { searchString: 'red flowers' };
+    }
+
+    componentDidMount() {
+        //this.doSearch();
     }
 
     updateSearchValue(event) {
@@ -21,8 +25,9 @@ class SearchElement extends Component {
     render() {
         return (
             <div className="SearchBox">
-                <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} />
-                <button onClick={this.doSearch.bind(this)}>Search Images</button>
+                <div>
+                    <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} />
+                </div><button onClick={this.doSearch.bind(this)}>Search...</button>
             </div>
         );
     }

@@ -11,7 +11,7 @@ class ImageResults extends Component {
                         <div>
                             <img src={item.src} />
                         </div>
-                        <span>{item.type}</span>
+                        {/*<span>{item.type}</span>*/}
                     </div>
                 ))}
             </div>

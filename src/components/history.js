@@ -16,14 +16,17 @@ class HistoryElement extends Component {
     render() {
         return (
             <div className="HistoryBox">
-                <button onClick={this.clearHistory.bind(this)}>Clear History</button>
-                <div>
+                <span>&nbsp;&nbsp;&nbsp;Last Searches:</span>
+                <div style={{ marginTop: '10px'}}>
                     {this.props.historyCache.map((item) => (
                         <div key={item.id} onClick={() => this.goToHistory(item)}>
                             {item.term}
                         </div>
                     ))}
                 </div>
+                { this.props.historyCache.length !== 0 &&
+                    <button onClick={this.clearHistory.bind(this)} style={{float: 'right'}}>Clear</button>
+                }
             </div>
         );
     }
