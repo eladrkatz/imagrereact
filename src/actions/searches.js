@@ -14,9 +14,57 @@ export function imagesFetchDataSuccess(imageResults) {
     };
 }
 
+export function imagesFetchDataSuccess2(imageResults) {
+    return {
+        type: 'IMAGES_FETCH_DATA_SUCCESS2',
+        imageResults
+    };
+}
+
 export function clearHistory() {
     return {
         type: 'HISTORY_CLEAR'
+    };
+}
+
+export function fetchImagesForBothProviders(searchText, addToHistory) {
+    return (dispatch) => {
+
+        if (addToHistory) {
+            dispatch(historySearchAdded(searchText));
+        }
+
+        let urlPixabay = `https://pixabay.com/api/?key=5237003-df8ec7ded9cea8b1e96684130&q=${searchText}&image_type=photo&pretty=true`;
+
+        fetch(urlPixabay).then(response => response.json()).then(response => {
+            let results = response.hits.map(r => {
+                return {
+                    id: r.id,
+                    src: r.previewURL,
+                    type: 'pixabay'
+                };
+            });
+
+            dispatch(imagesFetchDataSuccess(results));
+        });
+
+        let urlFlickr = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5d8cee43cf49296059873ec9577364b4&text=${searchText}&format=json&nojsoncallback=1`;
+
+        fetch(urlFlickr).then(response => response.json()).then(response => {
+            let results = [];
+
+            if (response.photos) {
+                results = response.photos.photo.map(r => {
+                    return {
+                        id: r.id,
+                        src: 'https://farm' + r.farm + '.staticflickr.com/' + r.server + '/' + r.id + '_' + r.secret + '.jpg',
+                        type: 'flickr' };
+                });
+            }
+
+            dispatch(imagesFetchDataSuccess2(results));
+
+        });
     };
 }
 

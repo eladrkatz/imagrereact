@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { imagesFetchData } from '../actions/searches';
+import { fetchImagesForBothProviders } from '../actions/searches';
 
 
 class SearchElement extends Component {
@@ -22,12 +22,18 @@ class SearchElement extends Component {
         this.props.fetchData(this.state.searchString);
     }
 
+    checkForEnter(event) {
+        if (event.keyCode === 13) {
+            this.doSearch();
+        }
+    }
+
     render() {
         return (
             <div className="SearchBox">
                 <div>
-                    <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} />
-                </div><button onClick={this.doSearch.bind(this)}>Search...</button>
+                    <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} onKeyDown={this.checkForEnter.bind(this)} />
+                </div><button onClick={this.doSearch.bind(this)}>Search</button>
             </div>
         );
     }
@@ -44,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(imagesFetchData(url, true))
+        fetchData: (url) => dispatch(fetchImagesForBothProviders(url, true))
     };
 };
 

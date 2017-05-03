@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import { imageResults, historyCache } from './searches';
+import { imageResults, imageResults2, historyCache } from './searches';
 
 export default combineReducers({
-    imageResults, historyCache
+    imageResults, imageResults2, historyCache
 });

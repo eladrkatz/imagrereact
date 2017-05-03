@@ -28,3 +28,13 @@ export function imageResults(state = [], action) {
             return state;
     }
 }
+
+export function imageResults2(state = [], action) {
+    switch (action.type) {
+        case 'IMAGES_FETCH_DATA_SUCCESS2':
+            return action.imageResults;
+
+        default:
+            return state;
+    }
+}
