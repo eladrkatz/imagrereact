@@ -34,7 +34,9 @@ export function fetchImagesForBothProviders(searchText, addToHistory) {
             dispatch(historySearchAdded(searchText));
         }
 
-        let urlPixabay = `https://pixabay.com/api/?key=5237003-df8ec7ded9cea8b1e96684130&q=${searchText}&image_type=photo&pretty=true`;
+        let page = 0;
+
+        let urlPixabay = `https://pixabay.com/api/?key=5237003-df8ec7ded9cea8b1e96684130&q=${searchText}&image_type=photo&pretty=true&per_page=30&page=${page + 1}`;
 
         fetch(urlPixabay).then(response => response.json()).then(response => {
             let results = response.hits.map(r => {
@@ -45,10 +47,12 @@ export function fetchImagesForBothProviders(searchText, addToHistory) {
                 };
             });
 
+            console.log('pixabay', response);
+
             dispatch(imagesFetchDataSuccess(results));
         });
 
-        let urlFlickr = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5d8cee43cf49296059873ec9577364b4&text=${searchText}&format=json&nojsoncallback=1`;
+        let urlFlickr = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=5d8cee43cf49296059873ec9577364b4&text=${searchText}&format=json&nojsoncallback=1&per_page=30&page=${page}`;
 
         fetch(urlFlickr).then(response => response.json()).then(response => {
             let results = [];
@@ -61,6 +65,8 @@ export function fetchImagesForBothProviders(searchText, addToHistory) {
                         type: 'flickr' };
                 });
             }
+
+            console.log('flickr', response);
 
             dispatch(imagesFetchDataSuccess2(results));
 
