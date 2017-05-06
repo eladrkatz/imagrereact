@@ -43,8 +43,8 @@ ImageResults.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        images: state.imageResults,
-        images2: state.imageResults2
+        images: state.imageResults.flickr.imageResults,
+        images2: state.imageResults.pixabay.imageResults
     };
 };
 

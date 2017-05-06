@@ -18,23 +18,47 @@ export function historyCache(state = [], action) {
     }
 }
 
+const initialState = {
+    flickr: {
+        imageResults: []
+    },
+    pixabay: {
+        imageResults: []
+    }
+};
 
-export function imageResults(state = [], action) {
+export function imageResults(state = initialState, action) {
     switch (action.type) {
         case 'IMAGES_FETCH_DATA_SUCCESS':
-            return action.imageResults;
+            let newState = Object.assign({}, state);
 
+            newState[action.provider].imageResults = action.imageResults;
+
+            console.log(newState);
+
+            return newState;
         default:
             return state;
     }
 }
 
-export function imageResults2(state = [], action) {
-    switch (action.type) {
-        case 'IMAGES_FETCH_DATA_SUCCESS2':
-            return action.imageResults;
 
-        default:
-            return state;
-    }
-}
+// export function imageResults(state = [], action) {
+//     switch (action.type) {
+//         case 'IMAGES_FETCH_DATA_SUCCESS':
+//             return action.imageResults;
+
+//         default:
+//             return state;
+//     }
+// }
+
+// export function imageResults2(state = [], action) {
+//     switch (action.type) {
+//         case 'IMAGES_FETCH_DATA_SUCCESS2':
+//             return action.imageResults;
+
+//         default:
+//             return state;
+//     }
+// }

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchImagesForBothProviders } from '../actions/searches';
+import { fetchImagesForProvider } from '../actions/searches';
 
 
 class SearchElement extends Component {
@@ -19,7 +19,9 @@ class SearchElement extends Component {
     }
 
     doSearch() {
-        this.props.fetchData(this.state.searchString);
+
+        this.props.fetchData('pixabay', this.state.searchString);
+        this.props.fetchData('flickr', this.state.searchString);
     }
 
     checkForEnter(event) {
@@ -50,7 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(fetchImagesForBothProviders(url, true))
+        fetchData: (provider, text) => dispatch(fetchImagesForProvider(provider, text))
     };
 };
 
