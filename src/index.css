@@ -28,7 +28,7 @@ body, input, button {
     height: 43px;
     margin-left: -1px;
     position:relative;
-    top:-1px;
+    top:-2px;
  }
 
 .ResultBox {

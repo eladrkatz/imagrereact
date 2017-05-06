@@ -24,7 +24,8 @@ const initialState = {
     },
     pixabay: {
         imageResults: []
-    }
+    },
+    page: 0
 };
 
 export function imageResults(state = initialState, action) {
@@ -32,33 +33,17 @@ export function imageResults(state = initialState, action) {
         case 'IMAGES_FETCH_DATA_SUCCESS':
             let newState = Object.assign({}, state);
 
-            newState[action.provider].imageResults = action.imageResults;
+            newState.page = action.page;
 
-            console.log(newState);
+            if (action.page === 0) {
+                newState[action.provider].imageResults = action.imageResults;
+            }
+            else {
+                newState[action.provider].imageResults = newState[action.provider].imageResults.concat(action.imageResults);
+            }
 
             return newState;
         default:
             return state;
     }
 }
-
-
-// export function imageResults(state = [], action) {
-//     switch (action.type) {
-//         case 'IMAGES_FETCH_DATA_SUCCESS':
-//             return action.imageResults;
-
-//         default:
-//             return state;
-//     }
-// }
-
-// export function imageResults2(state = [], action) {
-//     switch (action.type) {
-//         case 'IMAGES_FETCH_DATA_SUCCESS2':
-//             return action.imageResults;
-
-//         default:
-//             return state;
-//     }
-// }
