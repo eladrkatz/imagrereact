@@ -21,7 +21,7 @@ export function clearHistory() {
     };
 }
 
-const flickrKey = '985f447a21b6d873f69e05f3232ef20d';
+const flickrKey = 'a5c010de42f3427ab82af93f23de100f';
 const pixabayKey = '5237003-df8ec7ded9cea8b1e96684130';
 
 const providers = {

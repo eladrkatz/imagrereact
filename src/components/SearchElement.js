@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchImagesForProvider } from '../actions/searches';
+import { historySearchAdded } from '../actions/history';
 
 
 class SearchElement extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = { searchString: 'red flowers' };
+        this.state = { searchString: '' };
     }
 
     handleScroll() {
@@ -19,9 +20,6 @@ class SearchElement extends Component {
 
         if (windowBottom >= docHeight) {
             this.doSearch(this.props.page + 1);
-        }
-        else {
-            //console.log('not at bottom');
         }
     }
 
@@ -39,6 +37,12 @@ class SearchElement extends Component {
     }
 
     doSearch(page) {
+        if (this.state.searchString === '') return;
+
+        if (page === 0) {
+            this.props.historySearchAdded(this.state.searchString);
+        }
+
         this.props.fetchData('pixabay', this.state.searchString, page);
         this.props.fetchData('flickr', this.state.searchString, page);
     }
@@ -53,7 +57,7 @@ class SearchElement extends Component {
         return (
             <div className="SearchBox">
                 <div>
-                    <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} onKeyDown={this.checkForEnter.bind(this)} />
+                    <input type="text" value={this.state.searchString} onChange={this.updateSearchValue.bind(this)} onKeyDown={this.checkForEnter.bind(this)} placeholder="Type to search images" />
                 </div><button onClick={this.doSearch.bind(this, 0)}>Search</button>
             </div>
         );
@@ -63,7 +67,8 @@ class SearchElement extends Component {
 
 SearchElement.propTypes = {
     fetchData: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired
+    page: PropTypes.number.isRequired,
+    historySearchAdded: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -74,7 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (provider, text, page) => dispatch(fetchImagesForProvider(provider, text, page))
+        fetchData: (provider, text, page) => dispatch(fetchImagesForProvider(provider, text, page)),
+        historySearchAdded: text => dispatch(historySearchAdded(text))
     };
 };
 

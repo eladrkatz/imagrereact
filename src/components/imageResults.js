@@ -8,24 +8,32 @@ class ImageResults extends Component {
             <div>
                 <div style={{marginLeft: '212px', display: 'inline-block', width: '40%', verticalAlign: 'top'}} >
                     <div className="ResultBox">
+                    { this.props.images.length !== 0 &&
+                    <div>
+                        Flickr Results:
+                    </div>
+                    }
                         {this.props.images.map((item) => (
                             <div key={item.id} className="ImageResult">
                                 <div>
                                     <img src={item.src} />
                                 </div>
-                                {/*<span>{item.type}</span>*/}
                             </div>
                         ))}
                     </div>
                 </div>
                 <div style={{ display: 'inline-block', width: '40%', verticalAlign: 'top'}} >
                     <div className="ResultBox">
+                    { this.props.images2.length !== 0 &&
+                    <div>
+                        Pixabay Results:
+                    </div>
+                    }
                         {this.props.images2.map((item) => (
                             <div key={item.id} className="ImageResult">
                                 <div>
                                     <img src={item.src} />
                                 </div>
-                                {/*<span>{item.type}</span>*/}
                             </div>
                         ))}
                     </div>

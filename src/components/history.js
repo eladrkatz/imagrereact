@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { imagesFetchData } from '../actions/searches';
-import { clearHistory } from '../actions/searches';
+import { fetchImagesForProvider } from '../actions/searches';
+import { clearHistory } from '../actions/history';
 
 class HistoryElement extends Component {
 
     goToHistory(item) {
-        this.props.fetchData(item.term);
+        this.props.fetchData('pixabay', item.term, 0);
+        this.props.fetchData('flickr', item.term, 0);
     }
 
     clearHistory() {
@@ -15,6 +16,8 @@ class HistoryElement extends Component {
 
     render() {
         return (
+            <div>
+            { this.props.historyCache.length !== 0 &&
             <div className="HistoryBox">
                 <span>&nbsp;&nbsp;&nbsp;Last Searches:</span>
                 <div style={{ marginTop: '10px'}}>
@@ -24,9 +27,9 @@ class HistoryElement extends Component {
                         </div>
                     ))}
                 </div>
-                { this.props.historyCache.length !== 0 &&
                     <button onClick={this.clearHistory.bind(this)} style={{float: 'right'}}>Clear</button>
-                }
+            </div>
+            }
             </div>
         );
     }
@@ -47,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: (url) => dispatch(imagesFetchData(url, false)),
+        fetchData: (provider, text, page) => dispatch(fetchImagesForProvider(provider, text, page)),
         clearHistory: () => dispatch(clearHistory())
     };
 };
